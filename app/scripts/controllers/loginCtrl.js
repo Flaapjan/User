@@ -7,7 +7,9 @@ app.controller('loginCtrl', ['$scope','$rootScope','$location','loginFactory', f
 		scope.logged = loginFactory.get(scope.userLogin,
 			function(data){
 					scope.loggedUser = data.data;
-					//after Auth, login, retrieving data
+					//after Auth, login, retrieving data 
+					//----------------------------------
+					//Login Create token or user
 					//if System Admin
 					//Companies linked to user
 					// 0 <= companies < =1 - redirect to profile
