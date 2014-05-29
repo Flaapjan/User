@@ -16,8 +16,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       })
       .when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'loginCtrl',
-		abstract:true
+        controller: 'loginCtrl'
       })
       .when('/login/forgot_password', {
         templateUrl: 'views/forgotPass.html',
