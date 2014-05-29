@@ -1,0 +1,16 @@
+<h4>{{title}}</h4>
+
+<div>
+	<form role='form' name='myForm'>
+		<div class='form-group'>
+			<input type='email' placeholder='Email' class='form-control' required autofocus ng-model="userLogin.emailAddress" />
+		</div>
+		<div class='form-group'>
+			<input type='password' placeholder='Password' class='form-control' required ng-model="userLogin.password" />
+			<div class="error-message">{{loginError}}</div>
+		</div>
+		<button class='btn btn-default' type='submit' ng-click='submitLogin(userLogin)' ng-disabled='myForm.$invalid'>Submit</button>
+		<br/>
+		<div class='forgotPass'><a class="forgotPass-btn" ng-href='#/login/forgot_password'>Forgot password</a></div>
+	</form>
+</div>

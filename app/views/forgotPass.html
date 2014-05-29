@@ -1,0 +1,12 @@
+<h4>{{title}}</h4>
+
+<div class='msg'>
+	An email will be sent to your account. Please follow the link to reset your password.
+</div>
+<div class='resetWrap'>
+	<form role='form' name='myForm'>
+		<input type='email' class='form-control' placeholder='Email' ng-model="user.emailAddress" />
+		<a ng-href='#/login'><input type='button' class='btn back-button' value='Back'/></a>
+		<input type='submit' class='btn submit-button' ng-disabled='myForm.$invalid' value='Submit'/>
+	</form>
+</div>
