@@ -1,1 +1,11 @@
 <h4>{{title}}</h4>
+
+<select class='ddBilling' ng-model="myOption" ng-change="">
+    <option selected="selected" value="default">Please select</option>
+	<option ng-repeat="item in billingCompanies" value='{{item}}'>{{item.companyDescription}}</option>
+</select>
+
+<div class="billingBtnGroup">
+	<!--input type='button' ui-sref="login" ng-click='logout' value='Back' /-->
+	<input id='btnSelectBillingCompany' type='submit' value='Continue' disabled  />
+</div>
