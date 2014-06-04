@@ -36,6 +36,19 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "postinstall": "bower install",
+
+    "prestart": "npm install",
+    "start": "http-server -p 8000",
+
+    "pretest": "npm install",
+    "test": "karma start test/karma.conf.js",
+    "test-single-run": "karma start test/karma.conf.js  --single-run",
+
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor test/protractor-conf.js"
   }
 }

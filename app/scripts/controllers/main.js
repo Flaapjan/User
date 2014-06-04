@@ -1,9 +1,9 @@
 'use strict';
 
- app.controller('mainCtrl', function ($scope,$rootScope) {
+app.controller('mainCtrl', function ($scope,$rootScope) {
     $scope.title = 'Landing Page';
-	
-	$scope.loginFunc = function(val){
-		$rootScope.loginDirec = "";
-	}
-  });
+
+    $scope.loginFunc = function(val){
+        $rootScope.loginDirec = "";
+    }
+});

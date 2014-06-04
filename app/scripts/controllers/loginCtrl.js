@@ -2,14 +2,18 @@
 
 app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFactory', 'LoggedFactory', 'BillingCompanyFactory', function(scope, rootScope, location, AuthenticationFactory, LoggedFactory, BillingCompanyFactory){
 	scope.title = 'User Login';
+    
+    var incompleteUser;
 		
 	scope.submitLogin = function(userLogin){		
 		scope.authenticatedUser = AuthenticationFactory.authenticate(userLogin,
 			function(data){
+                scope.incompleteUser = data;
+                console.log(scope.incompleteUser);
                 if(data.authenticate == true) {
                     scope.currentUser = LoggedFactory.login(scope.authenticatedUser, function(data){
-                        scope.loggedinUser = data;
-                        rootScope.billingCompanies = BillingCompanyFactory.billingCompanies(scope.loggedinUser, function(data){
+                        rootScope.loggedinUser = data;
+                        rootScope.billingCompanies = BillingCompanyFactory.billingCompanies(rootScope.loggedinUser, function(data){
                             if(rootScope.billingCompanies.length >= 2) {
                                 location.path( "/billing_company/" + scope.loggedinUser.userID);
                             } else {
