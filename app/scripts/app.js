@@ -5,8 +5,7 @@ var app = angular.module('zaraApp',[
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute',
-    'ngMock'
+    'ngRoute'
   ]);
   
 app.config(['$routeProvider', function ($routeProvider) {

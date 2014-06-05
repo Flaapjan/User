@@ -12,12 +12,40 @@ describe('Zaralab controllers', function () {
 
     describe('Login controller', function(){
         var scope, ctrl, $httpMock;
+        
+        var incompleteData = {
+            authenticate: true,
+            userID: 2222, 
+            firstName: "Jeff", 
+            surname: "Apleton", 
+            emailAddress: "japple@email.com", 
+            password: "password"
+        }
+        
+        var fullUserData = {
+            userID: 2222, 
+            firstName: "Jeff", 
+            surname: "Apleton", 
+            emailAddress: "japple@email.com", 
+            password: "password"
+        }
 
         beforeEach(module('zaraApp'));
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
 			$httpMock = _$httpBackend_;
 
             $httpMock.expectPOST('http://localhost:8080/authenticate').respond(
+                {
+                    authenticate: true,
+                    userID: 2222, 
+                    firstName: "Jeff", 
+                    surname: "Apleton", 
+                    emailAddress: "japple@email.com", 
+                    password: "password"
+                }
+            );
+            
+            $httpMock.expectPOST('http://localhost:8080/login').respond(
                 {
                     userID: 2222, 
                     firstName: "Jeff", 
@@ -27,23 +55,28 @@ describe('Zaralab controllers', function () {
                 }
             );
             
+            $httpMock.expectPOST('http://localhost:8080/getBillingCompanies').respond(
+                [{}]
+            );
+            
             scope = $rootScope.$new();
             ctrl = $controller('loginCtrl', {$scope: scope});
 
         })); 
         
-        it('should create current user after authentication', function() {
+        it('should create incomplete user after authentication', function() {
                 expect(scope.incompleteUser).toBeUndefined();
-            
                 scope.submitLogin(scope.userLogin);
-            
                 $httpMock.flush();
-
-                expect(scope.incompleteUser).toEqualData({userID: 2222, firstName: "Jeff", surname: "Apleton", emailAddress: "japple@email.com", password: "password"});
-                 
+                expect(scope.incompleteUser).toEqualData(incompleteData);
         });
         
-        
+        it('should create logged in user after authentication', function() {
+                expect(scope.currentUser).toBeUndefined();
+                scope.submitLogin(scope.userLogin);
+                $httpMock.flush();
+                expect(scope.currentUser).toEqualData(fullUserData);
+        });
         
     });
     

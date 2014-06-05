@@ -3,6 +3,8 @@
 app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFactory', 'LoggedFactory', 'BillingCompanyFactory', function(scope, rootScope, location, AuthenticationFactory, LoggedFactory, BillingCompanyFactory){
 	scope.title = 'User Login';
     
+    console.log('test');
+    
     var incompleteUser;
 		
 	scope.submitLogin = function(userLogin){		
