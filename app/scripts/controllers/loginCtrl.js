@@ -3,18 +3,19 @@
 app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFactory', 'LoggedFactory', 'BillingCompanyFactory', function(scope, rootScope, location, AuthenticationFactory, LoggedFactory, BillingCompanyFactory){
 	scope.title = 'User Login';
     
-    console.log('test');
-    
     var incompleteUser;
 		
 	scope.submitLogin = function(userLogin){		
 		scope.authenticatedUser = AuthenticationFactory.authenticate(userLogin,
 			function(data){
                 scope.incompleteUser = data;
-                console.log(scope.incompleteUser);
                 if(data.authenticate == true) {
                     scope.currentUser = LoggedFactory.login(scope.authenticatedUser, function(data){
                         rootScope.loggedinUser = data;
+                        console.log(rootScope.loggedinUser);
+                        if(rootScope.loggedinUser && rootScope.loggedinUser.userRole.description == "System Administrator") {
+                            rootScope.sysAdmin = true;   
+                        }
                         rootScope.billingCompanies = BillingCompanyFactory.billingCompanies(rootScope.loggedinUser, function(data){
                             if(rootScope.billingCompanies.length >= 2) {
                                 location.path( "/billing_company/" + scope.loggedinUser.userID);
@@ -27,24 +28,7 @@ app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFa
                     console.log(data)
                     scope.loginError = "The email or password is incorrect."
                 }
-                
-                
-                //scope.loggedUser = data.data;
-                //console.log(scope.loggedUser);
-                //scope.currentUser = loggedinFactory.login(scope.userLogin,
-			         //function(data){
-                         //scope.loggedinUser = data.data;
-                         //console.log(loggedinUser);
-                    // });
-                
-                //after Auth, login, retrieving data 
-                //----------------------------------
-                //Login Create token or user
-                //if System Admin
-                //Companies linked to user
-                // 0 <= companies < =1 - redirect to profile
-                // 1 > companies - redirect to billing company
-				},
+            },
 			function(error) {
 				console.log(error)   // Error details
 				//console.log(scope.userLogin)   // Data being sent through

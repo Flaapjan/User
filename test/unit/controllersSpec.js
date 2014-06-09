@@ -29,6 +29,8 @@ describe('Zaralab controllers', function () {
             emailAddress: "japple@email.com", 
             password: "password"
         }
+        
+        var billingCompanies = [{billingCompanyId: 3, companyDescription: "Vida e Caffe"}, {billingCompanyId: 2, companyDescription: "Coke"}];
 
         beforeEach(module('zaraApp'));
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
@@ -56,7 +58,7 @@ describe('Zaralab controllers', function () {
             );
             
             $httpMock.expectPOST('http://localhost:8080/getBillingCompanies').respond(
-                [{}]
+                [{billingCompanyId: 3, companyDescription: "Vida e Caffe"}, {billingCompanyId: 2, companyDescription: "Coke"}]
             );
             
             scope = $rootScope.$new();
@@ -65,23 +67,29 @@ describe('Zaralab controllers', function () {
         })); 
         
         it('should create incomplete user after authentication', function() {
-                expect(scope.incompleteUser).toBeUndefined();
-                scope.submitLogin(scope.userLogin);
-                $httpMock.flush();
-                expect(scope.incompleteUser).toEqualData(incompleteData);
+            expect(scope.incompleteUser).toBeUndefined();
+            scope.submitLogin(scope.userLogin);
+            $httpMock.flush();
+            expect(scope.incompleteUser).toEqualData(incompleteData);
         });
         
         it('should create logged in user after authentication', function() {
-                expect(scope.currentUser).toBeUndefined();
-                scope.submitLogin(scope.userLogin);
-                $httpMock.flush();
-                expect(scope.currentUser).toEqualData(fullUserData);
+            expect(scope.currentUser).toBeUndefined();
+            scope.submitLogin(scope.userLogin);
+            $httpMock.flush();
+            expect(scope.currentUser).toEqualData(fullUserData);
+        });
+        
+        it('should return two billingcompanies', function() {
+            expect(scope.billingCompanies).toBeUndefined();
+            scope.submitLogin(scope.userLogin);
+            $httpMock.flush();
+            expect(scope.billingCompanies).toEqualData(billingCompanies);
+            expect(scope.billingCompanies.length).toBe(2);
         });
         
     });
     
-    
-
    /* describe('ForgotPassCtrl', function(){
         var scope, ctrl, $httpBackend;
 
@@ -113,21 +121,6 @@ describe('Zaralab controllers', function () {
 
     });
 
-    describe('BillingCompanyCtrl',function(){
-        var scope, ctrl, $httpBackend;
-
-        beforeEach(module('app'));
-
-        beforeEach(inject(function($rootScope, $controller) {
-            scope = $rootScope.$new();
-            ctrl = $controller('selectBilling', {$scope:scope});
-        })); 
-
-        describe("selectBilling",function(){
-            it("should return one or more billing companies",function(){
-
-            });
-        });
-    }); */
+    */
     
 });

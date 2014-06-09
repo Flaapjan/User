@@ -1,5 +1,7 @@
 'use strict';
 
-app.controller('navCtrl', ['$scope','$location', function(scope,location){
-	console.log('test1');
+app.controller('navCtrl', ['$scope', '$rootScope','$location', function(scope, rootScope, location){
+	
+    
+    
 }]);
