@@ -18,6 +18,14 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'views/login.html',
         controller: 'loginCtrl'
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'registerCtrl'
+      })
+      .when('/verification', {
+        templateUrl: 'views/verification.html',
+        controller: 'verificationCtrl'
+      })
       .when('/login/forgot_password', {
         templateUrl: 'views/forgotPass.html',
         controller: 'forgotPassCtrl'

@@ -19,7 +19,10 @@ describe('Zaralab controllers', function () {
             firstName: "Jeff", 
             surname: "Apleton", 
             emailAddress: "japple@email.com", 
-            password: "password"
+            password: "password",
+            userRole: {
+                description: "Admin"
+            }
         }
         
         var fullUserData = {
@@ -27,7 +30,10 @@ describe('Zaralab controllers', function () {
             firstName: "Jeff", 
             surname: "Apleton", 
             emailAddress: "japple@email.com", 
-            password: "password"
+            password: "password",
+            userRole: {
+                description: "Admin"
+            }
         }
         
         var billingCompanies = [{billingCompanyId: 3, companyDescription: "Vida e Caffe"}, {billingCompanyId: 2, companyDescription: "Coke"}];
@@ -43,7 +49,10 @@ describe('Zaralab controllers', function () {
                     firstName: "Jeff", 
                     surname: "Apleton", 
                     emailAddress: "japple@email.com", 
-                    password: "password"
+                    password: "password",
+                    userRole: {
+                        description: "Admin"
+                    }
                 }
             );
             
@@ -53,7 +62,10 @@ describe('Zaralab controllers', function () {
                     firstName: "Jeff", 
                     surname: "Apleton", 
                     emailAddress: "japple@email.com", 
-                    password: "password"
+                    password: "password",
+                    userRole: {
+                        description: "Admin"
+                    }
                 }
             );
             
@@ -90,37 +102,121 @@ describe('Zaralab controllers', function () {
         
     });
     
-   /* describe('ForgotPassCtrl', function(){
-        var scope, ctrl, $httpBackend;
-
-        beforeEach(module('app'));
+    describe('Verify profile name', function () {
+        var scope, ctrl, $httpMock;
+        
+        beforeEach(module('zaraApp'));
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+            $httpMock = _$httpBackend_;
 
+            $httpMock.expectPOST('http://localhost:8080/verifyProfileName').respond(
+                {
+                    0: "t", 1: "r", 2: "u", 3: "e"
+                }
+            );
             scope = $rootScope.$new();
-            ctrl = $controller('forgotPassCtrl', {$scope: scope});
-        })); 
+            ctrl = $controller('registerCtrl', {$scope: scope});
+        }));
 
-        it('Forgot password controller should be defined', function() {
-            //expect(ctrl).toBeDefined();
+        it("should return true for an existing profile name", function() {
+            expect(scope.profileNameVerified).toBeUndefined();
+            scope.verifyProfileName('jeff');
+            $httpMock.flush();
+            expect(scope.profileNameVerified).toBe("Not available");
         });
     });
 
-    describe('CosCtrl', function() {
-        var scope, $httpBackend;
-
-        beforeEach(module('app'));
+    describe('Verify email address', function () {
+        var scope, ctrl, $httpMock;
+        
+        beforeEach(module('zaraApp'));
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+            $httpMock = _$httpBackend_;
+
+            $httpMock.expectPOST('http://localhost:8080/verifyEmailAddress').respond(
+                {
+                    0: "f", 1: "a", 2: "l", 3: "s", 4: "e"
+                }
+            );
 
             scope = $rootScope.$new();
-        })); 
-
-        it('Class of service controller should be defined', inject(function($controller) {
-            var cosController = $controller('cosCtrl', {$scope: scope});
-            //expect(cosController).toBeDefined();
+            ctrl = $controller('registerCtrl', {$scope: scope});
         }));
 
+        it("should return false for an non-existing email address", function() {
+            expect(scope.emailVerified).toBeUndefined();
+            scope.verifyEmailAddress('saassas@email.com');
+            $httpMock.flush();
+            expect(scope.emailVerified).toBe("Available");
+        });
+    });
+    
+    describe('Register', function () {
+        var scope, ctrl, $httpMock;
+        
+        var registrationSubmit = {
+            emailAddress: "nekotjie1@gmail.com",
+            firstName: "Caitlin",
+            password: "password",
+            profileName: "nekotjie1",
+            surname: "Pringle"
+        }
+        
+        var userWithVerifyCode = {
+                emailAddress: "nekotjie1@gmail.com",
+                firstName: "Caitlin",
+                password: "password",
+                profileName: "nekotjie1",
+                surname: "Pringle",
+                verificationCode: "2619"
+        }
+        
+        beforeEach(module('zaraApp'));
+        beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+            $httpMock = _$httpBackend_;
+
+            $httpMock.expectPOST('http://localhost:8080/register').respond(
+                {
+                    emailAddress: "nekotjie1@gmail.com",
+                    firstName: "Caitlin",
+                    password: "password",
+                    profileName: "nekotjie1",
+                    surname: "Pringle",
+                    verificationCode: "2619"
+                }
+            );
+
+            scope = $rootScope.$new();
+            ctrl = $controller('registerCtrl', {$scope: scope});
+        }));
+
+        it("should return a verification code after registration", function() {
+            expect(scope.registeredUserUnverified).toBeUndefined();
+            scope.submitRegistration(registrationSubmit);
+            $httpMock.flush();
+            expect(scope.registeredUserUnverified).toEqualData(userWithVerifyCode);
+        });
+    });
+    
+    describe('Verify phone number', function () {
+        var scope, ctrl, $httpMock;
+        
+        beforeEach(module('zaraApp'));
+        beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+            $httpMock = _$httpBackend_;
+
+            $httpMock.expectPUT('http://localhost:8080/verifyTelephoneNumber').respond(
+                {
+                    //add response here
+                }
+            );
+
+            scope = $rootScope.$new();
+            ctrl = $controller('registerCtrl', {$scope: scope});
+        }));
+
+        
     });
 
-    */
     
 });

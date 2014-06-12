@@ -1,0 +1,11 @@
+<h4>{{title}}</h4>
+
+<div>
+	<form role='form' name='myForm'>
+		<div class='form-group'>
+			<input type='text' placeholder='Code' class='form-control' required autofocus ng-model="userVerify.verificationCode" />
+		</div>
+		<button class='btn btn-default' type='submit' ng-click='submitVerification(userVerify)' ng-disabled='myForm.$invalid'>Submit</button>
+		<br/>
+    </form>
+</div>

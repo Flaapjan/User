@@ -2,17 +2,16 @@
 
 app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFactory', 'LoggedFactory', 'BillingCompanyFactory', function(scope, rootScope, location, AuthenticationFactory, LoggedFactory, BillingCompanyFactory){
 	scope.title = 'User Login';
-    
     var incompleteUser;
-		
-	scope.submitLogin = function(userLogin){		
+    
+    scope.submitLogin = function(userLogin){		
 		scope.authenticatedUser = AuthenticationFactory.authenticate(userLogin,
 			function(data){
                 scope.incompleteUser = data;
                 if(data.authenticate == true) {
                     scope.currentUser = LoggedFactory.login(scope.authenticatedUser, function(data){
                         rootScope.loggedinUser = data;
-                        console.log(rootScope.loggedinUser);
+                        //console.log(rootScope.loggedinUser);
                         if(rootScope.loggedinUser && rootScope.loggedinUser.userRole.description == "System Administrator") {
                             rootScope.sysAdmin = true;   
                         }
@@ -25,7 +24,7 @@ app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFa
                         });                                                           
                     });
                 } else {
-                    console.log(data)
+                    //console.log(data)
                     scope.loginError = "The email or password is incorrect."
                 }
             },

@@ -1,0 +1,31 @@
+<h4>{{title}}</h4>
+
+<div>
+	<form role='form' name='myForm'>
+		<div class='form-group'>
+			<input type='text' placeholder='Profile name' class='form-control' required autofocus ng-model="userRegister.profileName" ng-blur='verifyProfileName(userRegister.profileName)' />
+            <span ng-bind="profileNameVerified"></span>
+		</div>
+        <div class='form-group'>
+			<input type='text' placeholder='First name' class='form-control' required ng-model="userRegister.firstName"/>
+        </div>
+         <div class='form-group'>
+			<input type='text' placeholder='Surname' class='form-control' required ng-model="userRegister.surname"/>
+        </div>
+		<div class='form-group'>
+			<input type='password' placeholder='Password' class='form-control' required ng-model="userRegister.password" />
+		</div>
+        <div class='form-group'>
+			<input type='password' placeholder='Confirm password' class='form-control' required />
+		</div>
+        <div class='form-group'>
+			<input type='text' placeholder='Telephone number' class='form-control' required />
+		</div>
+        <div class='form-group'>
+			<input type='email' placeholder='Email address' class='form-control' required ng-model="userRegister.emailAddress" ng-blur='verifyEmailAddress(userRegister.emailAddress)' />
+            <span ng-bind="emailVerified"></span>
+		</div>
+		<button class='btn btn-default' type='submit' ng-disabled='myForm.$invalid' ng-click="submitRegistration(userRegister)">Submit</button>
+		<br/>
+    </form>
+</div>
