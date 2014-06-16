@@ -4,7 +4,6 @@ app.controller('verificationCtrl', ['$scope','$rootScope','$location', 'VerifyPh
 	scope.title = 'Verification';
     
     scope.submitVerification = function(registeredUserUnverified) {
-        //rootScope.registeredUserUnverified.verificationCode = userVerify.verificationCode;
         VerifyPhoneFactory.verify(rootScope.registeredUserUnverified,
                 function(data){
                     console.log(data);
