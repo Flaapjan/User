@@ -11,7 +11,6 @@ app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFa
                 if(data.authenticate == true) {
                     scope.currentUser = LoggedFactory.login(scope.authenticatedUser, function(data){
                         rootScope.loggedinUser = data;
-                        //console.log(rootScope.loggedinUser);
                         if(rootScope.loggedinUser && rootScope.loggedinUser.userRole.description == "System Administrator") {
                             rootScope.sysAdmin = true;   
                         }

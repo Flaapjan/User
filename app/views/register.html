@@ -12,6 +12,10 @@
          <div class='form-group'>
 			<input type='text' placeholder='Surname' class='form-control' required ng-model="userRegister.surname"/>
         </div>
+        <div class='form-group'>
+			<input type='email' placeholder='Email address' class='form-control' required ng-model="userRegister.emailAddress" ng-blur='verifyEmailAddress(userRegister.emailAddress)' />
+            <span ng-bind="emailVerified"></span>
+		</div>
 		<div class='form-group'>
 			<input type='password' placeholder='Password' class='form-control' required ng-model="userRegister.password" />
 		</div>
@@ -21,10 +25,7 @@
         <div class='form-group'>
 			<input type='text' placeholder='Telephone number' class='form-control' required />
 		</div>
-        <div class='form-group'>
-			<input type='email' placeholder='Email address' class='form-control' required ng-model="userRegister.emailAddress" ng-blur='verifyEmailAddress(userRegister.emailAddress)' />
-            <span ng-bind="emailVerified"></span>
-		</div>
+        
 		<button class='btn btn-default' type='submit' ng-disabled='myForm.$invalid' ng-click="submitRegistration(userRegister)">Submit</button>
 		<br/>
     </form>

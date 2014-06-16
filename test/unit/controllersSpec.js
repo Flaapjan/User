@@ -85,7 +85,7 @@ describe('Zaralab controllers', function () {
             expect(scope.incompleteUser).toEqualData(incompleteData);
         });
         
-        it('should create logged in user after authentication', function() {
+        it('should create logged in user after login', function() {
             expect(scope.currentUser).toBeUndefined();
             scope.submitLogin(scope.userLogin);
             $httpMock.flush();
@@ -201,20 +201,45 @@ describe('Zaralab controllers', function () {
     describe('Verify phone number', function () {
         var scope, ctrl, $httpMock;
         
+        var verificationSubmit = {
+            emailAddress: "nekotjie1@gmail.com",
+            firstName: "Caitlin",
+            password: "password",
+            profileName: "nekotjie1",
+            surname: "Pringle", 
+            verificationCode: "2619"
+        }
+        
         beforeEach(module('zaraApp'));
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
             $httpMock = _$httpBackend_;
 
-            $httpMock.expectPUT('http://localhost:8080/verifyTelephoneNumber').respond(
+            $httpMock.expectPOST('http://localhost:8080/verifyTelephoneNumber').respond(
                 {
-                    //add response here
+                    emailAddress: "nekotjie1@gmail.com",
+                    firstName: "Caitlin",
+                    password: "password",
+                    profileName: "nekotjie1",
+                    surname: "Pringle",
+                    verificationCode: "2619",
+                    verified: "true"
                 }
             );
 
             scope = $rootScope.$new();
-            ctrl = $controller('registerCtrl', {$scope: scope});
+            ctrl = $controller('verificationCtrl', {$scope: scope});
         }));
 
+        it("should return verified as true if the code matches", function() {
+            expect(scope.verficationSuccessMessage).toBeUndefined();
+            scope.submitVerification(verificationSubmit);
+            $httpMock.flush();
+            expect(scope.verficationSuccessMessage).toBe("You have successfully been verified.");
+        });
+
+        it("should return verified as false if the code does not match", function() {
+            //TODO - server not supporting this yet. 
+        });
         
     });
 

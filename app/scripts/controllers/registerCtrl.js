@@ -42,9 +42,8 @@ app.controller('registerCtrl', ['$scope','$rootScope','$location', 'VerifyProfil
     }
     
     scope.submitRegistration = function(userRegister){		
-		//console.log(userRegister);
-        
-        //validation
+		      
+        //TODO: validation - email regex and password match
         
         RegisterFactory.register(userRegister,
             function(data) {

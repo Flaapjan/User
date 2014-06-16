@@ -3,9 +3,9 @@
 <div>
 	<form role='form' name='myForm'>
 		<div class='form-group'>
-			<input type='text' placeholder='Code' class='form-control' required autofocus ng-model="userVerify.verificationCode" />
+			<input type='text' placeholder='Code' class='form-control' required autofocus ng-model="registeredUserUnverified.verificationCode" />
 		</div>
-		<button class='btn btn-default' type='submit' ng-click='submitVerification(userVerify)' ng-disabled='myForm.$invalid'>Submit</button>
-		<br/>
+		<button class='btn btn-default' type='submit' ng-click='submitVerification(registeredUserUnverified)' ng-disabled='myForm.$invalid'>Submit</button>
+		<div ng-bind="verficationSuccessMessage"></div>
     </form>
 </div>

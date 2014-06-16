@@ -34,7 +34,7 @@ app.factory('VerifyPhoneFactory', ['$resource',
 	function($resource){
 		return $resource('http://localhost:8080/verifyTelephoneNumber', {}, {
 			verify: {
-                method: 'PUT'
+                method: 'POST'
             }
 		});
 	}
