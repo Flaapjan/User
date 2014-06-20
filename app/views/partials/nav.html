@@ -2,10 +2,10 @@
     <p class="companyName" ng-bind="company.companyDescription"></p>
     
 	<ul>
-		<a ng-href='#/login' ui-sref-active='active'><li>LOGIN</li></a>
-        <a ng-href='#/register' ui-sref-active='active'><li>REGISTER</li></a>
+		<a ng-href='#/login' ng-hide="loggedinUser" ui-sref-active='active'><li>LOGIN</li></a>
+        <a ng-href='#/register' ng-hide="loggedinUser" ui-sref-active='active'><li>REGISTER</li></a>
+        <a ng-href='' ng-show="loggedinUser" ng-click="logout()" ui-sref-active='active'><li>LOGOUT</li></a>
+        <a ng-href='#/profile/{{loggedinUser.userID}}' ng-show="loggedinUser"  ui-sref-active='active'><li>PROFILE</li></a>
 		<a ng-href='#/home' ui-sref-active='active'><li>HOME</li></a>
-        <a id="applicationUserRole" ng-show="sysAdmin" ng-href=''><li>USER ROLES</li></a>
-		<a id="applicationCOS" ng-show="sysAdmin" ng-href=''><li>CLASS OF SERVICE</li></a>
 	</ul>
 </div>

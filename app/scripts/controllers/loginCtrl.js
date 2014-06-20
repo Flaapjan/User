@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFactory', 'LoggedFactory', 'BillingCompanyFactory', function(scope, rootScope, location, AuthenticationFactory, LoggedFactory, BillingCompanyFactory){
+app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFactory', 'LoggedFactory', 'BillingCompanyFactory', 'user_roles', function(scope, rootScope, location, AuthenticationFactory, LoggedFactory, BillingCompanyFactory, user_roles){
 	scope.title = 'User Login';
     var incompleteUser;
     
@@ -15,9 +15,16 @@ app.controller('loginCtrl', ['$scope','$rootScope','$location','AuthenticationFa
                     //Login
                     scope.currentUser = LoggedFactory.login(scope.authenticatedUser, function(data){
                         rootScope.loggedinUser = data;
-                        if(rootScope.loggedinUser && rootScope.loggedinUser.userRole.description == "System Administrator") {
-                            rootScope.sysAdmin = true;   
+                        
+                        //console.log(user_roles.sysAdmin);
+                        
+                        if(rootScope.loggedinUser.userRole.description == user_roles.sysAdmin) {
+                            console.log("sysadmin true");   
                         }
+                        
+                        //if(rootScope.loggedinUser && rootScope.loggedinUser.userRole.description == "System Administrator") {
+                        //    rootScope.sysAdmin = true;   
+                        //}
                         
                         //Get billing companies
                         rootScope.billingCompanies = BillingCompanyFactory.billingCompanies(rootScope.loggedinUser, function(data){

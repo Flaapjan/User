@@ -1,0 +1,53 @@
+<h4>{{title}}</h4>
+
+<div>
+    <wizard on-before-step-change="log(event)" on-step-changing="log(event)" on-after-step-change="log(event)">
+
+      <step title="Step 1: Name">
+        <p>Company name:</p> <input type="text" ng-model="newCompany.name"/>
+        <p>Website:</p> <input type="text" ng-model="newCompany.website"/>
+      </step>
+
+      <step title="Step 2: Sites and services">
+        <span>Select number of sites:</p> 
+          
+        <select ng-model="newCompany.sites">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>  
+        </select>
+      </step>
+
+      <step title="Step 3: Site">
+        Description: <input type="text" ng-model="newCompany.site.description"/>
+        <p>Country: 
+            <select ng-model="newCompany.site.country">
+                <option value="SA">South Africa</option>
+                <option value="NZ">New Zealand</option>
+                <option value="USA">United States of America</option>
+                <option value="JPA">Japan</option>  
+            </select>
+        </p>
+        <p>Time zone: 
+            <select ng-model="newCompany.site.timeZone">
+                <option value="">GMT+2</option>
+                <option value="">GMT+1</option>
+                <option value="">GMT</option>
+                <option value="">GMT-1</option>  
+            </select>  
+         </p> 
+      </step>
+
+      <step title="Summary">
+        <p>Name: {{newCompany.name}}</p>
+        <p>Website: {{newCompany.website}}</p>
+        <p>Sites: {{newCompany.sites}}</p>
+        <p>Description: {{newCompany.site.description}}</p>
+        <p>Country: {{newCompany.site.country}}</p>
+        <p>Timezone: {{newCompany.site.timeZone}}</p>
+      </step>
+
+    </wizard>
+
+  </div>

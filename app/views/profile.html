@@ -5,10 +5,23 @@
 </div>
 
 <div class="profile_wrapper">
+    
     <ul>
         <li>Profile name: <p ng-bind="loggedinUser.profileName"></p></li>
         <li>First name:<p ng-bind="loggedinUser.firstName"></p></li>
         <li>Surname: <p ng-bind="loggedinUser.surname"></p></li>
         <li>Email address: <p ng-bind="loggedinUser.emailAddress"></p></li>
+        <li>User role: <p ng-bind="loggedinUser.userRole.description"></p></li>
     </ul>
+    
+    <!--<div>
+        <a ng-href='#/classOfService' ui-sref-active='active'>Manage class of service</a>
+    </div>
+    
+    <div>
+        <a ng-href='#/userRoles' ui-sref-active='active'>Manage user roles</a>
+    </div>-->
+    
 </div>
+
+<!-- ng-if="isAuthorized(user_roles.sysAdmin)" ->

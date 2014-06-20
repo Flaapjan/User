@@ -34,6 +34,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'views/profile.html',
         controller: 'profileCtrl'
       })
+      .when('/createCompany', {
+        templateUrl: 'views/createCompany.html',
+        controller: 'createCompanyCtrl'
+      })
       .when('/billing_company/:userId', {
         templateUrl: 'views/billing_company.html',
         controller: 'billingCompanyCtrl'
